@@ -8,4 +8,4 @@
 ## Solutions folder
 - Each file is the base solution we used to modify the problem in a .txt file, the title is  [problem number].txt
 ## Altered_solutions folder
-- Each file is the manually altered solution in a .txt, the title is [problem number]_syntactic.txt or [problem number]_logic.txt depending on how we changed the base solution
+- Each file is the manually altered solution in a .txt, the title is [problem number]_s.txt or [problem number]_l.txt (s = syntactic change, l = logic change)
