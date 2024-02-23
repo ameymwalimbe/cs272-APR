@@ -9,3 +9,5 @@
 - Each file is the base solution we used to modify the problem in a .txt file, the title is  [problem number].txt
 ## Altered_solutions folder
 - Each file is the manually altered solution in a .txt, the title is [problem number]_s.txt or [problem number]_l.txt (s = syntactic change, l = logic change)
+## GPT_solutions folder
+- Ran code from Altered_solutions on chat gpt. The GPT solutions from using our basic prompt is located in the basic_prompt folder. Each file has the naming convention [problem number]_[error type]_sol.txt
