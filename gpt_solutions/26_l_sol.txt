@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        if (nums.empty()) return 0; // If the vector is empty, no duplicates to remove
+        
+        int j = 1; // Initialize j at 1, assuming the first element is always unique
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums[i] != nums[i - 1]) {
+                nums[j] = nums[i]; // Shift unique elements to the front
+                j++; // Move the pointer forward
+            }
+        }
+        return j; // Return the length of the new array without duplicates
+    }
+};

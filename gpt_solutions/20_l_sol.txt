@@ -1,0 +1,32 @@
+#include <stack>
+#include <string>
+
+using namespace std;
+
+class Solution {
+public:
+    bool isValid(string s) {
+       stack<char> store;
+
+       for(auto c:s){
+           if (c == '(' || c == '{' || c == '[') {
+               store.push(c);
+           }
+           else { 
+               if (!store.empty() && store.top() == '(' && c == ')') {
+                   store.pop();
+               }
+               else if (!store.empty() && store.top() == '{' && c == '}') {
+                   store.pop();
+               }
+               else if (!store.empty() && store.top() == '[' && c == ']') {
+                   store.pop();
+               }
+               else {
+                   return false;
+               }
+           }
+       } 
+       return store.empty();
+    }
+};
