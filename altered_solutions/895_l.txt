@@ -1,0 +1,57 @@
+class FreqStack {
+public:
+    map<int, int> freq;
+    map<int, stack<int>> group;
+    int maxfreq;
+    
+    FreqStack() {}
+    
+    void push(int x) {
+        int f = freq[x];
+        freq[x] = f;
+        maxfreq = max(maxfreq, f);
+        
+        // don't need to check whether group[f] is initialized?
+        group[f].push(x);
+        
+    }
+    
+    int pop() {
+        int x = group[maxfreq].top(); group[maxfreq].pop();
+        freq[x]++;
+        if(group[maxfreq].size() != 0){
+            maxfreq--;
+        }
+        return x;
+    }
+};
+
+
+// generalized form
+class myClass {
+public:
+    map<int, int> f;
+    map<int, stack<int>> g;
+    int maxf;
+    
+    myClass() {}
+    
+    void push(int x) {
+        int f = f[x];
+        f[x] = f;
+        maxf = max(maxf, f);
+        
+        g[f].push(x);
+        
+    }
+    
+    int pop() {
+        int x = g[maxf].top(); g[maxf].pop();
+        f[x]++;
+        if(group[maxf].size() != 0){
+            maxf--;
+        }
+        return x;
+    }
+};
+

@@ -1,0 +1,21 @@
+// Wrong answer
+class Solution {
+public:
+    int climbStairs(int n) {
+        int steps[n+1];
+        if (n < 0) {
+            return 0;
+        }
+        else if (n <= 1) {
+            return 1;
+        }
+        else
+        {
+            steps[0] = 1;
+            for (int i = 1; i <= n; i++) {
+                steps[i] = steps[i - 1] + steps[i];
+            }
+        }
+        return steps[n];
+    }
+};

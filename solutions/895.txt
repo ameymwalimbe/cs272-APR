@@ -1,0 +1,36 @@
+class FreqStack {
+public:
+    map<int, int> freq;
+    map<int, stack<int>> group;
+    int maxfreq;
+    
+    FreqStack() {
+        maxfreq = 0;
+    }
+    
+    void push(int x) {
+        int f = freq[x] + 1;
+        freq[x] = f;
+        maxfreq = max(maxfreq, f);
+        
+        // don't need to check whether group[f] is initialized?
+        group[f].push(x);
+        
+        /*
+        if x is pushed multiple times, 
+        then group[1], group[2], group[3], ... will all have x 
+        */
+    }
+    
+    int pop() {
+        int x = group[maxfreq].top(); group[maxfreq].pop();
+        freq[x]--;
+        if(group[maxfreq].size() == 0){
+            /*
+            In this circumstance, maxfreq is consecutive
+            */
+            maxfreq--;
+        }
+        return x;
+    }
+};

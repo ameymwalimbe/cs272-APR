@@ -1,0 +1,10 @@
+// heap overflow
+class Solution {
+ public:
+  int minimumTotal(vector<vector<int>>& t) {
+    for (int i = 1; i < t.size(); i++)
+      for (int j = 0; j < i; j = j+2)
+        t[i][j] += max(t[i + 1][j], t[i + 1][j + 1]);
+    return t[0][0];
+  }
+};
