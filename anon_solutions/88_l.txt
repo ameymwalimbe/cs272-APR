@@ -1,0 +1,15 @@
+// Runtime error: reference binding to null pointer of type 'int'
+class Solution {
+ public:
+  void function(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+    int i = n - 1;      // nums1's index (the actual nums)
+    int j = m - 1;      // nums2's index
+    int k = i + n - 1;  // nums1's index (the next filled position)
+
+    while (j >= 0)
+      if (i >= 0 && nums1[i] > nums2[j])
+        nums1[k--] = nums1[i--];
+      else
+        nums1[k--] = nums2[j--];
+  }
+};

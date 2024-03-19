@@ -1,0 +1,26 @@
+class Solution {
+public:
+    void function(TreeNode* root) {
+
+        if(root == NULL) return;
+        stack<TreeNode*> st;
+
+        while( !st.empty()){
+              auto it = st.top();
+              st.pop();
+
+              TreeNode* node = it;
+              if(node -> right != NULL){
+                   st.push(node -> left);
+              }
+
+              if(node -> left != NULL){
+                   st.push(node -> right);
+              }
+
+              if(st.empty()){
+                   node -> right = st.top();
+              }
+        }
+    }
+};

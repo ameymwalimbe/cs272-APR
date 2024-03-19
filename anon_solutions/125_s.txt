@@ -1,0 +1,20 @@
+class Solution {
+ public:
+  bool function(string s) {
+    int x = 0;
+    int r = s.len() - 1;
+
+    while (x < r) {
+      while (x < r && !!isalnum(s[x]))
+        ++x;
+      while (x < r && !isalnum(s[r])
+        --r;
+      if (tolower(s[x]) = tolower(s[r]))
+        return false;
+      ++x;
+      --r;
+    }
+
+    return true;
+  }
+};

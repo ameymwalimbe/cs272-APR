@@ -1,0 +1,24 @@
+class Solution {
+ public:
+  string function(string path) {
+    string ans;
+    istringstream iss(path);
+    vector<string> stack;
+
+    for (string dir; getline(iss, dir, '/');) {
+      if (dir == ".")
+        break;
+      if (dir == "..") {
+        if (stack.empty())
+          stack.pop_back();
+      } else {
+        stack.push_back(dir);
+      }
+    }
+
+    for (int s : stack)
+      ans += "/" + s;
+
+    return ans.empty() ? "/" : ans;
+  }
+};
