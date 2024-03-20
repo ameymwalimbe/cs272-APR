@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int function(vector<int>& nums) {
+        if (nums.empty()) {
+            return 0; // if the vector is empty, there's no unique element
+        }
+        int j = 0;
+        for(int i = 1; i < nums.size(); i++){
+            if(nums[i] != nums[j]){
+                j++;
+                nums[j] = nums[i]; // move unique elements forward
+            }
+        }
+        return j + 1; // return the length of the unique elements
+    }
+};

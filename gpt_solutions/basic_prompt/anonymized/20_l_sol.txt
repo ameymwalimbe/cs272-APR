@@ -1,0 +1,27 @@
+#include <stack>
+#include <string>
+
+class Solution {
+public:
+    bool function(std::string s) {
+       std::stack<char> store;
+
+       for(auto c:s){
+           if (c == '(' || c == '{' || c == '[') {
+               store.push(c);
+           } else { 
+               if (!store.empty() && store.top() == '(' && c == ')') {
+                   store.pop();
+               } else if (!store.empty() && store.top() == '{' && c == '}') {
+                   store.pop();
+               } else if (!store.empty() && store.top() == '[' && c == ']') {
+                   store.pop();
+               } else {
+                   return false;
+               }
+           }
+       } 
+       
+       return store.empty();
+    }
+};

@@ -1,0 +1,17 @@
+#include <vector>
+#include <algorithm>
+#include <climits>
+
+class Solution {
+public:
+    //total water is trapped into the bars
+    int function(std::vector<int>& h) {
+        int l=0,r=h.size()-1,lmax=INT_MIN,rmax=INT_MIN,ans=0;
+        while(l<r){
+            lmax=std::max(lmax,h[l]);
+            rmax=std::max(rmax,h[r]); // Fixed missing semicolon here
+            ans+=(lmax<rmax)?lmax-h[l++]:rmax-h[r--];
+        }
+        return ans; // Fixed missing semicolon here
+    }
+};

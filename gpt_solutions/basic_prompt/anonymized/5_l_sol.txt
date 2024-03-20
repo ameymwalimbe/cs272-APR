@@ -1,0 +1,42 @@
+#include <string>
+#include <vector>
+using namespace std;
+
+class Solution { 
+private: 
+    bool function1(string &s, int i, int j){
+        while(i<j){
+            if(s[i] != s[j]){
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+public:
+    string function(string s) {
+        int n = s.size();
+        vector<string> substring;
+        for(int i=0; i<n; i++){
+            string temp = ""; // Changed "s" to ""
+            for(int j=i; j<n; j++){
+                temp += s[j];
+                substring.push_back(temp);
+            }
+        }
+        int max_len = 0;
+        string finalans = substring[0];
+        int m = substring.size();
+        for(int i=0; i<m; i++){
+            int len = substring[i].size(); // Changed variable name from s to len
+            if(function1(substring[i], 0, len-1)){
+                if(len > max_len){ // Changed <= to >
+                    max_len = len;
+                    finalans = substring[i];
+                }
+            }       
+        }
+        return finalans;
+    }
+};

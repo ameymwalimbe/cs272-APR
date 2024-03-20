@@ -1,0 +1,40 @@
+#include <iostream>
+#include <stack>
+#include <string>
+
+using namespace std;
+
+class Solution {
+public:
+    bool function(string s) {
+        stack<char> store;
+
+        for (auto c : s) {
+            if (c == '(' || c == '{' || c == '[') {
+                store.push(c);
+            } else {
+                if (!store.empty() && store.top() == '(' && c == ')') {
+                    store.pop();
+                } else if (!store.empty() && store.top() == '{' && c == '}') {
+                    store.pop();
+                } else if (!store.empty() && store.top() == '[' && c == ']') {
+                    store.pop();
+                } else {
+                    return false;
+                }
+            }
+        }
+        return store.empty();
+    }
+};
+
+int main() {
+    Solution solution;
+    string test = "{[()]}";
+    if (solution.function(test)) {
+        cout << "Parentheses are balanced." << endl;
+    } else {
+        cout << "Parentheses are not balanced." << endl;
+    }
+    return 0;
+}
