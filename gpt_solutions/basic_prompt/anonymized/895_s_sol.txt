@@ -1,0 +1,45 @@
+#include <iostream>
+#include <map>
+#include <stack>
+using namespace std;
+
+class myClass {
+public:
+    map<int, int> f;
+    map<int, stack<int>> g;
+    int maxf;
+    
+    myClass() {
+        maxf = 0; // Corrected max initialization
+    }
+    
+    void push(int x) {
+        int a = f[x] + 1;
+        f[x] = a;
+        maxf = max(maxf, a);
+        
+        g[a].push(x); // Corrected group to g
+    }
+    
+    int pop() {
+        int x = g[maxf].top(); 
+        g[maxf].pop();
+        f[x]--; // Corrected missing semicolon
+        if(g[maxf].size() == 0){ // Corrected size and maxf decrement
+            maxf--;
+        }
+        return x;
+    }
+};
+
+int main() {
+    myClass obj;
+    obj.push(1);
+    obj.push(2);
+    obj.push(1);
+    obj.push(3);
+    cout << obj.pop() << endl; // Should print 3
+    cout << obj.pop() << endl; // Should print 2
+    cout << obj.pop() << endl; // Should print 1
+    return 0;
+}

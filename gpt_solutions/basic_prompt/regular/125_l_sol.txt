@@ -1,0 +1,24 @@
+#include <cctype>
+#include <string>
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int l = 0;
+        int r = s.length() - 1; // Corrected the initialization of r
+
+        while (l < r) {
+            while (l < r && !isalnum(s[l])) // Corrected the increment operation for l
+                ++l;
+            while (l < r && !isalnum(s[r])) // Corrected the decrement operation for r
+                --r;
+            if (tolower(s[l]) != tolower(s[r])) {
+                return false; // Corrected the return value to false
+            }
+            ++l; // Moved the increment operation of l inside the if block
+            --r;
+        }
+
+        return true;
+    }
+};

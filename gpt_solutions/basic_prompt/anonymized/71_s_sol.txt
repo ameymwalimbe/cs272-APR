@@ -1,0 +1,30 @@
+#include <sstream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class Solution {
+ public:
+  string function(string path) {
+    string ans;
+    istringstream iss(path);
+    vector<string> stack;
+
+    for (string dir; getline(iss, dir, '/');) {
+      if (dir.empty() || dir == ".")
+        continue;
+      if (dir == "..") { // Corrected comparison operator
+        if (!stack.empty())
+          stack.pop_back();
+      } else {
+        stack.push_back(dir); // Added dir parameter to push_back
+      }
+    }
+
+    for (const string &s : stack) // Used reference to avoid unnecessary copying
+      ans += "/" + s;
+
+    return ans.empty() ? "/" : ans; // Corrected ternary operator
+  }
+};

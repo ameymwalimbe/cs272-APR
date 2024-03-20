@@ -1,0 +1,31 @@
+#include <stack>
+
+class Solution {
+public:
+    void function(TreeNode* root) {
+        if (root == NULL) return;
+        std::stack<TreeNode*> st;
+        st.push(root);
+
+        while (!st.empty()) {
+            TreeNode* it = st.top();
+            st.pop();
+
+            TreeNode* node = it;
+
+            if (node->right != NULL) {
+                st.push(node->right);
+            }
+
+            if (node->left != NULL) {
+                st.push(node->left);
+            }
+
+            if (!st.empty()) {
+                node->right = st.top();
+            }
+
+            node->left = NULL;
+        }
+    }
+};

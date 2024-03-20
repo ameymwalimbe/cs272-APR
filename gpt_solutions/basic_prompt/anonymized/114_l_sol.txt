@@ -1,0 +1,29 @@
+#include <stack>
+
+class Solution {
+public:
+    void function(TreeNode* root) {
+        if (root == nullptr) return;
+        
+        std::stack<TreeNode*> st;
+        st.push(root); // Push the root onto the stack
+
+        while (!st.empty()) {
+            TreeNode* node = st.top();
+            st.pop();
+
+            if (node->right != nullptr) {
+                st.push(node->right);
+            }
+
+            if (node->left != nullptr) {
+                st.push(node->left);
+            }
+
+            if (!st.empty()) {
+                // Fix the link to the right child
+                node->right = st.top();
+            }
+        }
+    }
+};

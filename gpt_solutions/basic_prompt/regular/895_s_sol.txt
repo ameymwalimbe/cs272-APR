@@ -1,0 +1,32 @@
+#include <map>
+#include <stack>
+using namespace std;
+
+class FreqStack {
+public:
+    map<int, int> freq;
+    map<int, stack<int>> group;
+    int maxfreq;
+    
+    FreqStack() {
+        maxfreq = 0;
+    }
+    
+    void push(int x) {
+        int f = freq[x] + 1;
+        freq[x] = f;
+        maxfreq = max(maxfreq, f);
+        
+        group[f].push(x);
+    }
+    
+    int pop() {
+        int x = group[maxfreq].top(); 
+        group[maxfreq].pop();
+        freq[x]--; // Corrected missing semicolon
+        if(group[maxfreq].size() == 0){ // Corrected syntax: size() is a function
+            maxfreq--; // Corrected decrement operator
+        }
+        return x;
+    }
+};

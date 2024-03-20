@@ -1,0 +1,23 @@
+#include <string>
+#include <cctype>
+
+class Solution {
+ public:
+  bool isPalindrome(std::string s) {
+    int x = 0;
+    int r = s.length() - 1;
+
+    while (x < r) {
+      while (x < r && !std::isalnum(s[x]))
+        ++x;
+      while (x < r && !std::isalnum(s[r]))
+        --r;
+      if (std::tolower(s[x]) != std::tolower(s[r]))
+        return false;
+      ++x;
+      --r;
+    }
+
+    return true;
+  }
+};
