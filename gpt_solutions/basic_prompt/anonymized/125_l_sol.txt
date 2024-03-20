@@ -1,0 +1,23 @@
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    bool function(string s) {
+        int l = 0;
+        int r = s.length() - 1; // corrected bounds
+
+        while (l < r) {
+            while (l < r && !isalnum(s[l])) // corrected condition and increment
+                ++l;
+            while (l < r && !isalnum(s[r])) // corrected condition and decrement
+                --r;
+            if (tolower(s[l]) != tolower(s[r]))
+                return false; // corrected return value
+            ++l;
+            --r; // corrected decrement
+        }
+
+        return true; // corrected return value
+    }
+};

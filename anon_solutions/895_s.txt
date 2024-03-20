@@ -1,36 +1,3 @@
-class FreqStack {
-public:
-    map<int, int> freq;
-    map<int, stack<int>> group;
-    int maxfreq;
-    
-    FreqStack() {
-        maxfreq = 0;
-    }
-    
-    void function(int x) {
-        int f = freq[x] + 1;
-        freq[x] = f;
-        maxfreq = max(maxfreq, f);
-        
-        group[f].push(x);
-    }
-    
-    int function1() {
-        int x = group[maxfreq].top(); 
-        group[maxfreq].pop();
-        freq[x]--
-        if(group[maxfreq].size == 0){
-            maxfreq-;
-        }
-        return x;
-    }
-};
-
-
-// generalized form
-There’s a bug in the program below. Try to fix it and return the complete fix for the code in the form of a code block.
-
 class myClass {
 public:
     map<int, int> f;
@@ -41,7 +8,7 @@ public:
         max = 0;
     }
     
-    void function(int x) {
+    void push(int x) {
         int a = f[x] + 1;
         f[x] = a;
         maxf = max(maxf, a);
@@ -49,7 +16,7 @@ public:
         group[a].push(x);
     }
     
-    int function1() {
+    int pop() {
         int x = g[maxf].top(); 
         g[maxf].pop();
         f[x]--

@@ -1,0 +1,30 @@
+#include <map>
+#include <stack>
+#include <algorithm> // for std::max
+
+using namespace std;
+
+class myClass {
+public:
+    map<int, int> f;
+    map<int, stack<int>> g;
+    int maxf;
+    
+    myClass() : maxf(0) {} // Initialize maxf
+    
+    void push(int x) {
+        int freq = ++f[x]; // Increment frequency before using it
+        maxf = max(maxf, freq); // Update maxf
+        
+        g[freq].push(x);        
+    }
+    
+    int pop() {
+        int x = g[maxf].top(); g[maxf].pop();
+        f[x]--;
+        if(g[maxf].empty()){ // Check if stack is empty
+            maxf--;
+        }
+        return x;
+    }
+};

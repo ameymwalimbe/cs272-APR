@@ -1,0 +1,42 @@
+#include <iostream>
+#include <map>
+#include <stack>
+using namespace std;
+
+class FreqStack {
+public:
+    map<int, int> freq;
+    map<int, stack<int>> group;
+    int maxfreq;
+    
+    FreqStack() {
+        maxfreq = 0;
+    }
+    
+    void push(int x) {
+        int f = ++freq[x];
+        maxfreq = max(maxfreq, f);
+        group[f].push(x);
+    }
+    
+    int pop() {
+        int x = group[maxfreq].top();
+        group[maxfreq].pop();
+        freq[x]--;
+        if (group[maxfreq].empty()) {
+            maxfreq--;
+        }
+        return x;
+    }
+};
+
+int main() {
+    FreqStack stack;
+    stack.push(5);
+    stack.push(7);
+    stack.push(5);
+    cout << stack.pop() << endl;
+    cout << stack.pop() << endl;
+    cout << stack.pop() << endl;
+    return 0;
+}

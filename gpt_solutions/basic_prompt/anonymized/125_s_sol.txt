@@ -1,0 +1,23 @@
+#include <string>
+#include <cctype>
+
+class Solution {
+ public:
+  bool function(std::string s) {
+    int x = 0;
+    int r = s.length() - 1;
+
+    while (x < r) {
+      while (x < r && !isalnum(s[x])) // Fixed condition
+        ++x;
+      while (x < r && !isalnum(s[r])) // Fixed condition
+        --r;
+      if (tolower(s[x]) != tolower(s[r])) // Fixed comparison operator
+        return false;
+      ++x;
+      --r;
+    }
+
+    return true;
+  }
+};

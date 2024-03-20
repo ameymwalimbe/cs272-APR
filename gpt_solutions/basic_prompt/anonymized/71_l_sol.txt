@@ -1,0 +1,36 @@
+#include <iostream>
+#include <sstream>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    string function(string path) {
+        string ans;
+        istringstream iss(path);
+        vector<string> stack;
+
+        for (string dir; getline(iss, dir, '/');) {
+            if (dir == ".")
+                continue;
+            if (dir == "..") {
+                if (!stack.empty())
+                    stack.pop_back();
+            } else {
+                stack.push_back(dir);
+            }
+        }
+
+        for (string s : stack)
+            ans += "/" + s;
+
+        return ans.empty() ? "/" : ans;
+    }
+};
+
+int main() {
+    Solution solution;
+    string path = "/a/./b/../../c/";
+    cout << solution.function(path) << endl; // Output should be: "/c"
+    return 0;
+}
