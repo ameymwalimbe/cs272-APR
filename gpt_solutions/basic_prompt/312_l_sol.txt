@@ -1,0 +1,48 @@
+#include <vector>
+#include <algorithm>
+
+class Solution {
+public:
+    int maxCoins(std::vector<int>& nums) {
+        int n = nums.size();
+        // Modify the dimensions of dp to account for the additional 1s on both sides
+        std::vector<std::vector<int>> dp(n + 2, std::vector<int>(n + 2, 0));
+        std::vector<int> new_nums(n + 2, 1);
+        int i = 1;
+        for (auto num : nums) {
+            new_nums[i++] = num;
+        }
+        for (int len = 2; len <= n + 1; len++) { // Adjust the loop range
+            for (int left = 1; left <= n - len + 2; left++) { // Adjust the loop range
+                int right = left + len - 1;
+                for (int k = left; k < right; k++) {
+                    dp[left][right] = std::max(dp[left][right], dp[left][k] + dp[k + 1][right] + new_nums[left - 1] * new_nums[k] * new_nums[right + 1]);
+                }
+            }
+        }
+        return dp[1][n];
+    }
+};
+
+// anonymous
+class Solution {
+public:
+    int function(vector<int>& nums) {
+        int n = nums.size();        
+        vector<vector<int>> dp(n + 1, vector<int>(n + 1));
+        vector<int> new_nums(n + 1, 1);
+        int i = 1;
+        for(auto num : nums) {
+            new_nums[i++] = num;
+        }
+        for(int len = 4; len <= n; len++) { 
+            for(int i = 0; i <= n - len; i++) {
+                int j = i + len - 1;
+                for(int k = i + 1; k < j; k++) { 
+                    dp[i][j] = max(dp[i][j], dp[i][k] + dp[k][j] + new_nums[i] * new_nums[k] * new_nums[j]);
+                }
+            }
+        }
+        return dp[0][n - 1];
+    }
+};

@@ -1,0 +1,13 @@
+class Solution {
+public:
+    void function(vector<char>& s) {
+        int e = s.size();
+        int i = 0;
+        while(i < s.size()){
+            char temp = s[i];
+            s[i] = s[e];
+            s[e] = temp;
+            i++;
+        }
+    }
+};

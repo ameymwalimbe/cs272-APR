@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int brokenCalc(int startValue, int target) {
+        int ans = 0;
+        while (target > startValue) {
+            if (target % 2 == 0) {
+                target /= 2; // Fixed the division assignment
+            } else {
+                target += 1;
+            }
+            ans++; 
+        }
+        ans += (startValue - target); // Fixed the assignment operator and the comparison operator
+        return ans;
+    }
+};

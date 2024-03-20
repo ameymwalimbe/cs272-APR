@@ -1,0 +1,43 @@
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    int titleToNumber(string columnTitle) {
+        int ans = 0;
+        int power = 1; // Initialize power of 26
+
+        // Traverse the string from right to left
+        for (int i = columnTitle.size() - 1; i >= 0; i--) {
+            // Calculate the contribution of current character
+            ans += (columnTitle[i] - 'A' + 1) * power;
+
+            // Update the power for the next iteration
+            power *= 26;
+        }
+        return ans;
+    }
+};
+
+// anonymized - worked
+class Solution {
+public:
+    int function(string columnTitle) {
+        int index = 0;
+        int ans = 0;
+
+        for(int i=columnTitle.size()-1; i>=0; i--){
+            ans += power(26, index) * (columnTitle[i] - 'A' + 1);
+            index++;
+        }
+        return ans;
+    }
+
+    int power(int base, int exponent) {
+        int result = 1;
+        for (int i = 0; i < exponent; ++i) {
+            result *= base;
+        }
+        return result;
+    }
+};

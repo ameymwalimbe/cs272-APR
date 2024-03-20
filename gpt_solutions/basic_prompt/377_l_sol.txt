@@ -1,0 +1,67 @@
+class Solution {
+public:
+    int solve(vector<int>&nums,int target){
+        if(target==0)
+            return 1;
+        if(target<0)
+            return 0;
+        int ans=0;
+        for(int i=0;i<nums.size() - 1;i++){
+            ans=ans+solve(nums,target-nums[i]);
+        }
+        return ans;
+    }
+    int solvedp(vector<int>&nums,int target,vector<int>&dp){
+        if(target==0)
+            return 1;
+        if(target<0)
+            return 0;
+        if(dp[target] != -1) // Change from 'dp[target] == 0' to 'dp[target] != -1'
+            return dp[target];
+        int ans=0;
+        for(int i=0;i<nums.size();i++){
+            ans += solvedp(nums,target-nums[i],dp); // Fix the recursive call
+        }
+        return dp[target]=ans;
+    }
+    int combinationSum4(vector<int>& nums, int target){
+        vector<int>dp(target+2,-1);
+        return solvedp(nums,target,dp);
+    }
+};
+
+
+// anonymous
+class Solution {
+public:
+    int function1(vector<int>& nums, int target) {
+        if (target == 0)
+            return 1;
+        if (target < 0)
+            return 0;
+        int ans = 0;
+        for (int i = 0; i < nums.size(); i++) { // Fixed loop condition
+            ans += function1(nums, target - nums[i]);
+        }
+        return ans;
+    }
+
+    int function2(vector<int>& nums, int target, vector<int>& dp) {
+        if (target == 0)
+            return 1;
+        if (target < 0)
+            return 0;
+        if (dp[target] != -1) // Corrected condition
+            return dp[target];
+        int ans = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            ans += function2(nums, target - nums[i], dp); // Corrected recursive call
+        }
+        return dp[target] = ans;
+    }
+
+    int function3(vector<int>& nums, int target) {
+        vector<int> dp(target + 1, -1); // Changed size to target + 1
+        return function2(nums, target, dp);
+    }
+};
