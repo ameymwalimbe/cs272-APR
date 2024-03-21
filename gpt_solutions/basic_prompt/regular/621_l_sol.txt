@@ -1,0 +1,23 @@
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        int freq[26] = {0}; // changed size to 26
+        for(char task : tasks){
+            freq[task - 'A']++;
+        }
+        sort(begin(freq) , end(freq), greater<int>()); // sort in descending order
+        int chunk = freq[0] - 1; // chunk is the max frequency task
+        int idle = chunk * n; // changed idel to idle
+
+        for(int i = 1; i < 26 && freq[i] > 0; i++){ // start from 1
+            idle -= min(chunk, freq[i]);
+        }
+
+        return max(0, (int)tasks.size() - idle); // corrected return statement
+    }
+};
