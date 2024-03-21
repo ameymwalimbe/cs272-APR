@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int findUnsortedSubarray(vector<int>& nums) {
+        vector<int> arr= nums;
+        sort(arr.begin(), arr.end());
+        
+        int ln= nums.size(),i=0,j=ln-1;
+        
+        //from left to right, find first index where sorted array differs wrt nums
+        while(i<ln){
+            if(arr[i]!= nums[i])break;
+            i++;
+        }
+        
+        //from right to left, find first index where sorted array differs wrt nums
+        while(j>=0){
+            if(arr[j]!= nums[j])break;
+            j--;
+        }
+        
+        return (i>=j)? 0: j-i+1;
+    }
+};

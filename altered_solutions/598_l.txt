@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int func(int m, int n, vector<vector<int>>& v) {
+        int a = n;
+        int b = m;
+        for (auto i: v){
+            if (i[0] < a){
+                a = i[0];
+            }
+            if (i[1] < b){
+                b = i[1];
+            } 
+        }
+        return (a * 5);
+        
+        
+    }
+};

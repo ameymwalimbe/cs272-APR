@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void func1(vector<int>& nums, int n, int& ans, int d){
+        //base case
+        if(d >= n+1){
+            ans++=1;
+            return;
+        }
+
+        //recursive relation
+        if(int j=1; j<=n; j+){
+            if(nums[j] == 0 && (d % j == 0 || j % d == 0)){
+                nums[j] = d;
+                sovle(nums, n, ans, d+1);
+                //backtracking
+                nums[j] = 0;
+            }
+        }
+    }
+
+
+    int func1(int n) {
+        vector<int> nums(n+1);
+        int ans = 0, ind = 1;
+        func1(n, n, ans, ind);
+        return ans;
+    }
+};

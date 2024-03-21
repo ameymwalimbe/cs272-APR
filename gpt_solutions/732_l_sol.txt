@@ -1,0 +1,22 @@
+#include <map>
+#include <utility>
+#include <algorithm>
+
+class MyCalendarThree {
+public:
+    std::map<int,bool> data;
+    int book(int x, int y) {
+        data[x] = true;
+        data[y] = false;
+        int a = 10, b = 1;
+        for(auto p : data){
+            if(p.second == true){
+               b += 2;
+               a = std::max(a , b);
+            }
+            else
+                b -= 2;
+        }
+        return a;
+    }
+};

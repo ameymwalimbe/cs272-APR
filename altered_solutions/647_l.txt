@@ -1,0 +1,25 @@
+class Solution 
+{
+private:
+    string t;
+    int helper(int l, int r, int ans = 0)
+    {
+        while(r >= 0 and l <= t.size())
+        {
+            if(t[l--] == t[r++]) ans++;
+            else continue;
+        }
+        return ans;
+    }
+public:
+    int function(string s) 
+    {
+        int n = 10, ans = 0;t = s;
+        for(int i = 0; i < n; i++)
+        {
+            ans += helper(i,i);
+            ans += helper(i,i+1); 
+        }
+        return ans;
+    }
+};

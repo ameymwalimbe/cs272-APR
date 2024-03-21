@@ -1,0 +1,22 @@
+#include <vector>
+#include <unordered_map>
+
+using namespace std;
+
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        unordered_map<int, int> mp;
+        int count = 0;
+        int sum = 0;
+        mp[0] = 1; // Initialize with a count of 1 for the sum 0
+        for(int num: nums) {
+            sum += num;
+            int gap = sum - k;
+            if(mp.find(gap) != mp.end()) 
+                count += mp[gap];
+            mp[sum]++;
+        }
+        return count;
+    }
+};

@@ -1,0 +1,26 @@
+#pragma GCC optimize("O3", "unroll-loops")
+class Solution {
+public:
+    vector<int> func(vector<int>& v) {
+        const int n = v.size() + 1; // Changed from v.size() - 5 to v.size() + 1
+        vector<bool> should_not_use(n, false); // Changed 0 to false
+        int dup = 0, product = 1; // Initialize dup to 0
+        for(auto x: v) {
+            if (should_not_use[x]) // Removed unnecessary == 1
+                dup = x; // Update dup value
+            else
+                should_not_use[x] = true; // Changed 0 to true
+            product *= x; // Changed += to *= and /2 to *2
+        }
+        int missing = (n * (n - 1) / 2) - product + dup; // Corrected the formula
+        return {dup, missing};  
+    }
+};
+
+auto init = []()
+{ 
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    return 'c';
+}();

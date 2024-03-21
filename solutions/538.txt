@@ -1,0 +1,63 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+
+    void inOrderUtil(TreeNode *root, vector<int> &data)
+    {
+        if (root == NULL)
+        {
+            return ; 
+        }
+        // L
+        inOrderUtil(root -> left, data) ; 
+        // N
+        data.push_back(root -> val) ; 
+        // R
+        inOrderUtil(root -> right, data) ; 
+    }
+
+    void updateUtil(TreeNode *root, vector<int> &data, int &index)
+    {
+        if (root == NULL)
+        {
+            return ; 
+        }
+        // L
+        updateUtil(root -> left, data, index) ; 
+        // N
+        root -> val = data[index] ;
+        index ++ ;   
+        // R
+        updateUtil(root -> right, data, index) ; 
+    }
+
+    TreeNode* convertBST(TreeNode* root) {
+        vector<int> data ; 
+        // store the sorted order traversal / InOrder traversal of BST
+        inOrderUtil (root, data) ; 
+
+        int n = data.size() ; 
+        // convert sorted array such that each value replaced with (original value + all values greater than than value)
+        // Data array in Ascending Order therefore traverse from END to START
+        for (int i = n - 2 ; i >= 0 ; i --)
+        {
+            data[i] += data[i + 1] ; 
+        }
+
+        int index = 0 ; 
+        // update the values of nodes of BST
+        updateUtil(root, data, index) ; 
+
+        return root ; 
+    }
+};

@@ -1,0 +1,30 @@
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    void func1(vector<int>& nums, int n, int& ans, int d){
+        // Base case
+        if(d > n){
+            ans++;
+            return;
+        }
+
+        // Recursive relation
+        for(int j = 1; j <= n; j++){
+            if(nums[j] == 0 && (d % j == 0 || j % d == 0)){
+                nums[j] = d;
+                func1(nums, n, ans, d + 1); // Fixed function call
+                // Backtracking
+                nums[j] = 0;
+            }
+        }
+    }
+
+    int func1(int n) {
+        vector<int> nums(n+1);
+        int ans = 0, ind = 1;
+        func1(nums, n, ans, ind); // Fixed function call
+        return ans;
+    }
+};

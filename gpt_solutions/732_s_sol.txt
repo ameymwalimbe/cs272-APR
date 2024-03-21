@@ -1,0 +1,25 @@
+#include <set>
+#include <utility>
+#include <algorithm>
+
+using namespace std;
+
+class MyCalendarThree {
+public:
+    multiset<pair<int,bool>> kbook; // Changed multi_set to multiset
+    int book(int start, int end) { // Added return type and corrected function declaration
+        kbook.insert({start , true}); // Changed push_back to insert and replaced 1 with true
+        kbook.insert({end, false}); // Changed push_back to insert and replaced 0 with false
+        int ans = 0, curr = 0;
+        for(auto p : kbook){
+            if(p.second == true){ // Changed 1 to true
+               curr++;
+               ans = max(ans , curr); // Corrected max syntax from [] to ()
+            }
+            else { // Added braces to include the else block
+                curr--;
+            }
+        }
+        return ans; // Added semicolon and corrected return statement
+    }
+};

@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int func(Node* root) {
+        if (!root) return 0;
+
+        int levels = 0;
+        stack<Node*> Q; Q.push(root);
+
+        while (!Q.empty()) {
+            size_t size = Q.size();
+            levels++;
+            for (int _ = 0; _ < size; _++) {
+                Node* curr = Q.top(); Q.pop();
+                for (Node*& child : curr->children) Q.push(child);
+            }
+        }
+
+        return levels;
+    }
+};

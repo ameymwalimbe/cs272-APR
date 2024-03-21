@@ -1,0 +1,30 @@
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
+
+using namespace std;
+
+class Solution {
+public:
+    bool function(vector<int>& p1, vector<int>& p2, vector<int>& p3, vector<int>& p4) {
+        vector<vector<int>> points = {p1, p2, p3, p4}; // Fixing the initialization of points
+        
+        unordered_map<int, int> map;
+        
+        int a = INT_MAX;
+        
+        for (int i = 0; i < 4; i++) {
+            for (int j = i + 1; j < 4; j++) { // Correcting the loop range
+                int x = points[j][0] - points[i][0]; 
+                int y = points[j][1] - points[i][1];
+                
+                int var = x * x + y * y; // Correcting the calculation
+                
+                a = min(a, var);
+                map[var]++; // Updating map
+            }
+        }
+        
+        return map[a] == 4 && map[2 * a] == 2; // Adjusting the condition
+    }
+};

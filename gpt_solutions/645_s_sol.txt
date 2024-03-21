@@ -1,0 +1,27 @@
+#pragma GCC optimize("O3", "unroll-loops")
+class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+        const int n = nums.size();
+        vector<bool> seen(n + 1, false); // Fix: Corrected the initialization syntax
+        int dup, sum = 0;
+        for (int x : nums) { // Fix: Corrected the syntax for range-based for loop
+            if (seen[x]) { // Fix: Changed 1 to true
+                dup = x;
+            } else {
+                seen[x] = true; // Fix: Corrected the syntax for setting the element to true
+            }
+            sum += x;
+        }
+        int missing = n * (n + 1) / 2 - sum + dup; // Fix: Added multiplication operator *
+        return {dup, missing}; // Fix: Corrected the return statement syntax
+    }
+};
+
+auto init = []()
+{ 
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    return 'c';
+}();

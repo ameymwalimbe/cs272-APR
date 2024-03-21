@@ -1,0 +1,50 @@
+class Solution {
+public:
+
+    void func1(TreeNode *root, vector<int> &data)
+    {
+        if (root == NULL)
+        {
+            return ; 
+        }
+        func1(root->left, data) ; 
+
+        data.push_back(root->val) ; 
+
+        func1(root->right, data) ; 
+    }
+
+    void func2(TreeNode *root, vector<int> &data, int &index)
+    {
+        if (root == NULL)
+        {
+            return ; 
+        }
+        // L
+        func2(root->left, data, index) ; 
+        // N
+        root->val = data[index] ;
+        index ++ ;   
+        // R
+        func2(root->right, data, index) ; 
+    }
+
+    TreeNode* func3(TreeNode* root) {
+        if (root == NULL)
+            return NULL;
+        
+        vector<int> data ; 
+        func1(root, data) ; 
+
+        int n = data.size() ; 
+        for (int i = n - 2 ; i >= 0 ; i --)
+        {
+            data[i] += data[i + 1]; 
+        }
+
+        int index = 0 ; 
+        func2(root, data, index) ; 
+
+        return root ; 
+    }
+};

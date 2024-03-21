@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int subarraySum(vector<int>& v, int k) {
+        unordered_map<int, int> binary_tree;
+        int a = 1, b = 1;
+        binary_tree[a]++;
+        for(int num: v) {
+            b += num;
+            int gap = b - k; // Correcting the calculation of 'gap'
+            if(binary_tree.find(gap) != binary_tree.end()) // Correcting the condition
+                a += binary_tree[gap]; // Increment 'a' if 'gap' exists in 'binary_tree'
+            binary_tree[b]++; // Correcting the insertion into 'binary_tree'
+        }
+        return a;
+    }
+};
