@@ -1,0 +1,21 @@
+#include <vector>
+#include <algorithm>
+
+class Solution {
+public:
+    int func(std::vector<char>& tasks, int n) {
+        int freq[26] = {0};
+        for(char task : tasks){
+            freq[task - 'A']++;
+        }
+        std::sort(std::begin(freq), std::end(freq), std::greater<int>());
+        int chunk = freq[0] - 1;
+        int idle = chunk * n;
+
+        for(int i = 1; i < 26 && freq[i] > 0; i++){
+            idle -= std::min(chunk, freq[i]);
+        }
+
+        return idle < 0 ? tasks.size() : tasks.size() + idle;
+    }
+};

@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int func(string haystack, string needle) {
+        if(haystack.length() < needle.length()){
+            return -1;
+        }
+        int index = -1;
+        int result = -1;
+        for(int i = 0; i <= haystack.length() - needle.length(); i++) { // corrected loop condition
+            if(haystack[i] == needle[0]){
+                index = i;
+                for(int j = 0; j < needle.length(); j++) { // corrected variable name and loop condition
+                    if(haystack[i+j] != needle[j]){ // corrected comparison condition
+                        index = -1;
+                        break;
+                    }
+                }
+                if(index != -1){
+                    result = index;
+                    break; // corrected spelling of 'break'
+                }
+            }
+        }
+        return result;
+    }
+};

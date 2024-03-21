@@ -1,0 +1,22 @@
+#include <vector>
+#include <algorithm>
+
+class Solution {
+public:
+    int func(std::vector<char>& tasks, int n) {
+        std::vector<int> freq(26, 0); // Changed to vector to fix array out-of-bounds issue
+        for(char task : tasks){
+            freq[task - 'A']++;
+        }
+        std::sort(freq.begin(), freq.end(), std::greater<int>()); // Sorting in descending order
+
+        int maxFreq = freq[0] - 1;
+        int idleTime = maxFreq * n;
+
+        for(int i = 1; i < freq.size() && freq[i] > 0; i++){
+            idleTime -= std::min(maxFreq, freq[i]);
+        }
+
+        return idleTime < 0 ? tasks.size() : tasks.size() + idleTime;
+    }
+};
