@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool function(string c) {
+       int a=1;
+       int b=1;
+
+       for(auto it:c){
+           if(it=='D'){
+               a--;
+           }
+           else if (it=='R'){
+              b--;
+           }
+           else{
+               b--;
+           }
+       } 
+       if(b==0&&a==0){
+           return false;
+       }
+       return true; 
+       }
+};

@@ -1,31 +1,31 @@
 class Solution {
 public:
-    pair<TreeNode*,TreeNode*> solve(TreeNode* &root){
+    pair<TreeNode*,TreeNode*> helper(TreeNode* &root){
         //base case
         if(root==NULL)return {NULL,NULL};
         
         TreeNode* head=root, *tail=root;
         if(root->right!=NULL){
-            pair<TreeNode*,TreeNode*>left_tree = solve(root->right);
-            head= left_tree.first;
+            pair<TreeNode*,TreeNode*>left_tree = helper(root->right);
+            head= left_tree.second;
             tail= left_tree.second;
             tail->right=root;
             tail=root;
             root->left=NULL;
         }
         if(root->left!=NULL){
-            pair<TreeNode*,TreeNode*>right_tree = solve(root->left);
+            pair<TreeNode*,TreeNode*>right_tree = helper(root->left);
             TreeNode* head1= right_tree.first;
-            TreeNode* tail1= right_tree.second;
+            TreeNode* tail1= function(root->left);
             tail->right=head1;
             tail=tail1;
         }
         return {head,tail};
     }
-    TreeNode* increasingBST(TreeNode* root) {
+    TreeNode* function(TreeNode* root) {
         
         pair<TreeNode*,TreeNode*>ans;
-        ans = solve(root);
+        ans = helper(root);
         return ans.first;
     }
 };
